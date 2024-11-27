@@ -4,11 +4,42 @@ using UnityEngine;
 
 public class Bloques : MonoBehaviour
 {
-    private void OnCollisionEnter(Collider col)
+    private AudioSource audioSource;
+
+    [SerializeField]
+    private AudioClip chocar;
+
+    [SerializeField]
+    private AudioClip destruir;
+
+    [SerializeField]
+    float puntosDeVida;
+
+    [SerializeField]
+    float puntos;
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+    private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag("ball"))
         { 
-        Destroy(col.gameObject);
+            if (puntosDeVida == 0)
+            {
+                Destroy(gameObject);
+               // SumarPuntos()
+               audioSource.PlayOneShot(destruir);
+            }
+            else 
+            {
+               puntosDeVida = puntosDeVida - 1;
+               audioSource.PlayOneShot(chocar);
+            }
         }
     }
+   /* void SumarPuntos()
+    {
+
+    }*/
 }

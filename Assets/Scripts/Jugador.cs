@@ -11,9 +11,6 @@ public class Jugador : MonoBehaviour
     GameObject jugador;
     float movimientoEjeX;
     public float velocidadMovimiento = 10;
-    float tiempo = 300;
-    [SerializeField]
-    TextMeshProUGUI contador;
     void Update()
     {
         if(juego.activeSelf)
@@ -21,9 +18,8 @@ public class Jugador : MonoBehaviour
             
             movimientoEjeX = Input.GetAxis("Horizontal") * Time.deltaTime * velocidadMovimiento;
             transform.Translate(movimientoEjeX, 0, 0);
-            tiempo = tiempo - Time.deltaTime;
-            contador.text = tiempo.ToString("000");
-               
+            if (transform.position.x < -6) transform.position = new Vector3(-6f, -3.5f, 0);
+            if (transform.position.x > 6) transform.position = new Vector3(6f, -3.5f, 0);
         }
     }
 }
