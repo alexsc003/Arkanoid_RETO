@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Bloques : MonoBehaviour
 {
+
+
     private AudioSource audioSource;
 
     [SerializeField]
@@ -16,7 +18,9 @@ public class Bloques : MonoBehaviour
     float puntosDeVida;
 
     [SerializeField]
-    float puntos;
+    int puntuacion;
+
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -28,8 +32,8 @@ public class Bloques : MonoBehaviour
             if (puntosDeVida == 0)
             {
                 Destroy(gameObject);
-               // SumarPuntos()
-               audioSource.PlayOneShot(destruir);
+                Pelota.instance.SumarPuntuacion(puntuacion);
+                audioSource.PlayOneShot(destruir);
             }
             else 
             {
@@ -38,8 +42,4 @@ public class Bloques : MonoBehaviour
             }
         }
     }
-   /* void SumarPuntos()
-    {
-
-    }*/
 }
