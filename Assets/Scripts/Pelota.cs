@@ -35,13 +35,6 @@ public class Pelota : MonoBehaviour
     TextMeshProUGUI textoVidas;
 
     [SerializeField]
-    TextMeshProUGUI tiempoRestante;
-
-    float tiempo = 300;
-    [SerializeField]
-    TextMeshProUGUI contador;
-
-    [SerializeField]
     int puntuacionTotal;
 
     [SerializeField]
@@ -80,20 +73,17 @@ public class Pelota : MonoBehaviour
     {
         if (juego.activeSelf)
         {
-            tiempo = tiempo - Time.deltaTime;
-            contador.text = tiempo.ToString("000");
             textoVidas.text = numeroDeVidas.ToString("00");
             if (Input.GetKeyDown(KeyCode.Space) && !isBallMoving)
                 { 
                     transform.parent = null;
-                    gameObject.GetComponent<Rigidbody>().AddForce(0,450,0);
+                    gameObject.GetComponent<Rigidbody>().AddForce(10,450,0);
                     isBallMoving = true;               
                 }
-            Debug.Log(numeroDeVidas);
+            Debug.Log(puntosGanar);
             if (numeroDeVidas <= 0)
             {
                 juego.SetActive(false);
-                tiempoRestante.text = "-Tiempo: " + (300 - tiempo).ToString("00:00");
                 puntuacionTextoGameOver.text = "-Puntuacion: " + puntuacionTotal.ToString("00000");
                 gameOver.SetActive(true);
             }
@@ -123,10 +113,10 @@ public class Pelota : MonoBehaviour
             rb.isKinematic = false;
             pelota.transform.parent = jugador.transform;
             pelota.transform.position = jugador.transform.position;
-            if (col.gameObject.CompareTag("Block"))
-            {
-                puntosGanar = puntosGanar + 1;
-            }
+        }
+        if (col.gameObject.CompareTag("Block"))
+        {
+            puntosGanar = puntosGanar + 1;
         }
     }
    

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4909557536733691932}
   m_Layer: 0
   m_Name: BloqueEpico
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   chocar: {fileID: 0}
   destruir: {fileID: 0}
   puntosDeVida: 3
-  puntuacion: 0
+  puntuacion: 250
 --- !u!82 &4909557536733691932
 AudioSource:
   m_ObjectHideFlags: 0
