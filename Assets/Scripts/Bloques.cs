@@ -20,6 +20,7 @@ public class Bloques : MonoBehaviour
     [SerializeField]
     int puntuacion;
 
+    int iEscondite = -1;
 
     private void Start()
     {
@@ -41,5 +42,9 @@ public class Bloques : MonoBehaviour
                audioSource.PlayOneShot(chocar);
             }
         }
+    }
+    public void SetEscondite(int escon)
+    {
+        iEscondite = escon;
     }
 }

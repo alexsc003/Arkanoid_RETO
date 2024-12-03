@@ -7,6 +7,9 @@ public class Pelota : MonoBehaviour
 {
     public static Pelota instance;
     [SerializeField]
+    GameObject menu;
+
+    [SerializeField]
     GameObject[] bloques;
 
     [SerializeField]
@@ -52,10 +55,13 @@ public class Pelota : MonoBehaviour
     [SerializeField]
     float puntosGanar;
 
+
+
     void Start()
     {
      rb = GetComponent<Rigidbody>();
      UpdateHighScore();
+      
     }
     private void Awake()
     {
@@ -75,9 +81,9 @@ public class Pelota : MonoBehaviour
         {
             textoVidas.text = numeroDeVidas.ToString("00");
             if (Input.GetKeyDown(KeyCode.Space) && !isBallMoving)
-                { 
-                    transform.parent = null;
-                    gameObject.GetComponent<Rigidbody>().AddForce(10,450,0);
+                {
+                transform.parent = null;
+                    gameObject.GetComponent<Rigidbody>().AddForce(Random.Range(-40.0f,40.0f),450,0);
                     isBallMoving = true;               
                 }
             Debug.Log(puntosGanar);
@@ -131,4 +137,50 @@ public class Pelota : MonoBehaviour
     {
         highScoreText.text = $"HighScore: {PlayerPrefs.GetInt("HighScore", 0)}";
     }
+    /*public void Creacion()
+    {
+        
+       if (juego.activeSelf) 
+        {
+            
+            
+                int ibloques = Random.Range(0, bloques.Length);
+            int ilocalizacionesBloques = Random.Range(0, localizacionesBloques.Length);
+        
+        
+            if (bloques[ibloques].activeSelf == true)
+            {           
+               for (int i = 0; i < bloques.Length; i++)           
+               {              
+                  if (bloques[i].activeSelf == false && bloques[ibloques].activeSelf == true)
+                  { 
+                     ibloques = i;
+                  }
+               }
+            }
+            if (localizacionesBloques[ilocalizacionesBloques].activeSelf == true)
+            {
+                
+              for (int i = 0; i < localizacionesBloques.Length; i++)
+              {
+               if (localizacionesBloques[i].activeSelf == false && localizacionesBloques[ilocalizacionesBloques].activeSelf == true)
+                {
+                 ilocalizacionesBloques = i;
+                }
+              }
+            }
+            bloques[ibloques].transform.position = localizacionesBloques[ilocalizacionesBloques].transform.position;
+            bloques[ilocalizacionesBloques].GetComponent<Bloques>().SetEscondite(ilocalizacionesBloques);
+            bloques[ilocalizacionesBloques].SetActive(true);
+            localizacionesBloques[ilocalizacionesBloques].SetActive(true);
+            
+    }
+    }*/
+    public void Jugar()
+    {
+        juego.SetActive(true);
+        menu.SetActive(false);
+        
+    }
 }
+
