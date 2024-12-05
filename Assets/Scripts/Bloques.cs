@@ -32,9 +32,9 @@ public class Bloques : MonoBehaviour
         { 
             if (puntosDeVida == 0)
             {
-                Destroy(gameObject);
-                Pelota.instance.SumarPuntuacion(puntuacion);
                 audioSource.PlayOneShot(destruir);
+                Pelota.instance.SumarPuntuacion(puntuacion);
+                Destroy(gameObject);
             }
             else 
             {
