@@ -45,6 +45,8 @@ public class Pelota : MonoBehaviour
 
     [SerializeField]
     TextMeshProUGUI puntuacionTextoGameOver;
+    [SerializeField]
+    TextMeshProUGUI puntuacionTextoVictoria;
 
     [SerializeField]
     TextMeshProUGUI highScoreText;
@@ -86,17 +88,17 @@ public class Pelota : MonoBehaviour
                     gameObject.GetComponent<Rigidbody>().AddForce(Random.Range(-40.0f,40.0f),450,0);
                     isBallMoving = true;               
                 }
-            Debug.Log(puntosGanar);
             if (numeroDeVidas <= 0)
             {
                 juego.SetActive(false);
                 puntuacionTextoGameOver.text = "-Puntuacion: " + puntuacionTotal.ToString("00000");
                 gameOver.SetActive(true);
             }
-           if (puntosGanar >= 35)
+           if (puntosGanar >= 35 )
             {
                 juego.SetActive(false);
                 pantallaVictoria.SetActive(true);
+                puntuacionTextoVictoria.text = puntuacionTotal.ToString("00000");
             }
         }
     }
@@ -124,6 +126,16 @@ public class Pelota : MonoBehaviour
         {
             puntosGanar = puntosGanar + 1;
         }
+        if (col.gameObject.CompareTag("bolapuntos"))
+        {
+            puntuacionTotal = puntuacionTotal + 1000;
+            Destroy(col.gameObject);
+        }
+        if (col.gameObject.CompareTag("bolavidas"))
+        {
+            numeroDeVidas = numeroDeVidas + 1;
+            Destroy(col.gameObject);
+        }
     }
    
     void CheckHighScore()
@@ -137,45 +149,7 @@ public class Pelota : MonoBehaviour
     {
         highScoreText.text = $"HighScore: {PlayerPrefs.GetInt("HighScore", 0)}";
     }
-    /*public void Creacion()
-    {
-        
-       if (juego.activeSelf) 
-        {
-            
-            
-                int ibloques = Random.Range(0, bloques.Length);
-            int ilocalizacionesBloques = Random.Range(0, localizacionesBloques.Length);
-        
-        
-            if (bloques[ibloques].activeSelf == true)
-            {           
-               for (int i = 0; i < bloques.Length; i++)           
-               {              
-                  if (bloques[i].activeSelf == false && bloques[ibloques].activeSelf == true)
-                  { 
-                     ibloques = i;
-                  }
-               }
-            }
-            if (localizacionesBloques[ilocalizacionesBloques].activeSelf == true)
-            {
-                
-              for (int i = 0; i < localizacionesBloques.Length; i++)
-              {
-               if (localizacionesBloques[i].activeSelf == false && localizacionesBloques[ilocalizacionesBloques].activeSelf == true)
-                {
-                 ilocalizacionesBloques = i;
-                }
-              }
-            }
-            bloques[ibloques].transform.position = localizacionesBloques[ilocalizacionesBloques].transform.position;
-            bloques[ilocalizacionesBloques].GetComponent<Bloques>().SetEscondite(ilocalizacionesBloques);
-            bloques[ilocalizacionesBloques].SetActive(true);
-            localizacionesBloques[ilocalizacionesBloques].SetActive(true);
-            
-    }
-    }*/
+
     public void Jugar()
     {
         juego.SetActive(true);
